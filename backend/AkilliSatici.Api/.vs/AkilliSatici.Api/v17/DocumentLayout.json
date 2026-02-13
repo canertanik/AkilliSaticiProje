@@ -1,0 +1,289 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\dtos\\forgotpassworddto.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\dtos\\forgotpassworddto.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\services\\emailservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\services\\emailservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\migrations\\20260202114334_addresetcodefieldstoappuser2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\migrations\\20260202114334_addresetcodefieldstoappuser2.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\migrations\\20260202113608_addresetcodefieldstoappuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\migrations\\20260202113608_addresetcodefieldstoappuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\migrations\\20260202113608_addresetcodefieldstoappuser.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\migrations\\20260202113608_addresetcodefieldstoappuser.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\dtos\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\dtos\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\dtos\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|c:\\users\\caner44\\desktop\\akillisaticifluter\\backend\\akillisatici.api\\akillisatici.api\\dtos\\productupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2DD02BDC-19C7-461D-A25B-43B35D5F7D15}|AkilliSatici.Api\\AkilliSatici.Api.csproj|solutionrelative:akillisatici.api\\dtos\\productupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 379,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailServices.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Services\\EmailServices.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Services\\EmailServices.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Services\\EmailServices.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Services\\EmailServices.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwDIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T22:11:02.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\appsettings.json",
+              "RelativeToolTip": "AkilliSatici.Api\\appsettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-02T22:08:13.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20260202114334_AddResetCodeFieldsToAppUser2.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202114334_AddResetCodeFieldsToAppUser2.Designer.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Migrations\\20260202114334_AddResetCodeFieldsToAppUser2.Designer.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202114334_AddResetCodeFieldsToAppUser2.Designer.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Migrations\\20260202114334_AddResetCodeFieldsToAppUser2.Designer.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAIwIAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:44:13.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260202113608_AddResetCodeFieldsToAppUser.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:41:15.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "20260202113608_AddResetCodeFieldsToAppUser.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.Designer.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.Designer.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.Designer.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Migrations\\20260202113608_AddResetCodeFieldsToAppUser.Designer.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAAH0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:40:37.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ResetPasswordDto.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ResetPasswordDto.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Dtos\\ResetPasswordDto.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ResetPasswordDto.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Dtos\\ResetPasswordDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:31:01.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ForgotPasswordDto.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ForgotPasswordDto.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Dtos\\ForgotPasswordDto.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ForgotPasswordDto.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Dtos\\ForgotPasswordDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:29:50.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\LoginDto.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Dtos\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\LoginDto.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Dtos\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:27:41.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Models\\Product.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Models\\Product.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:03:10.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Models\\AppUser.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Models\\AppUser.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Models\\AppUser.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Models\\AppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T11:02:50.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAuwF0AAAB4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T14:03:22.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ProductUpdateDto.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Dtos\\ProductUpdateDto.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ProductUpdateDto.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Dtos\\ProductUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T13:57:04.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProductCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ProductCreateDto.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Dtos\\ProductCreateDto.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Dtos\\ProductCreateDto.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Dtos\\ProductCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T13:55:50.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Program.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Program.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Program.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAAsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-01T12:44:53.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "AkilliSatici.Api\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\caner44\\Desktop\\AkilliSaticiFluter\\backend\\AkilliSatici.Api\\AkilliSatici.Api\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "AkilliSatici.Api\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAuwGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T19:03:18.781Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 21,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

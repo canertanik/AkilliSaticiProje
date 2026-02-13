@@ -1,0 +1,15 @@
+﻿using System.ComponentModel.DataAnnotations;
+using AkilliSatici.Api.Models;
+
+namespace AkilliSatici.Api.Dtos;
+
+public record ProductCreateDto(
+    [Required, MaxLength(200)] string Title,
+    string? Description,
+    decimal? MinPrice,
+    decimal? MaxPrice,
+    string? Category,
+    string? ImageUrl,
+    bool IsAiGenerated,
+    ProductStatus Status
+);
