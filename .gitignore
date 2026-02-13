@@ -7,3 +7,6 @@
 **/.vscode/
 **/.env
 **/.env.*
+# ASP.NET Core secrets
+appsettings.json
+appsettings.*.json
