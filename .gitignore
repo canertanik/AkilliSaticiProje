@@ -1,0 +1,9 @@
+**/.vs/
+**/bin/
+**/obj/
+**/.dart_tool/
+**/build/
+**/.idea/
+**/.vscode/
+**/.env
+**/.env.*
