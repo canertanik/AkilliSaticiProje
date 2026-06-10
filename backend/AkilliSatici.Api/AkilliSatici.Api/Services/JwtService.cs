@@ -26,7 +26,9 @@ public class JwtService
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
-            new("storeName", user.StoreName ?? "")
+            new("storeName", user.StoreName ?? ""),
+            new(ClaimTypes.Role, user.IsAdmin ? "Admin" : "User"),
+            new("isAdmin", user.IsAdmin.ToString().ToLower())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_opt.Key));

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../core/utils/platform_image.dart';
@@ -37,17 +36,11 @@ class ProductCard extends StatelessWidget {
                   color: Colors.grey.shade200,
                   child: () {
                     final imageUrl = product.imageUrl.trim();
-                    if (imageUrl.isEmpty && product.webImageBytes == null) {
+                    if (imageUrl.isEmpty) {
                       return const Icon(
                         Icons.image,
                         size: 32,
                         color: Colors.grey,
-                      );
-                    }
-                    if (product.webImageBytes != null) {
-                      return Image.memory(
-                        product.webImageBytes!,
-                        fit: BoxFit.cover,
                       );
                     }
                     final isRemote =
@@ -55,13 +48,6 @@ class ProductCard extends StatelessWidget {
                         imageUrl.startsWith('https://');
                     if (isRemote) {
                       return Image.network(imageUrl, fit: BoxFit.cover);
-                    }
-                    if (kIsWeb) {
-                      return const Icon(
-                        Icons.image,
-                        size: 32,
-                        color: Colors.grey,
-                      );
                     }
                     return buildFileImage(imageUrl, fit: BoxFit.cover);
                   }(),

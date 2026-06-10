@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace AkilliSatici.Api.Models;
 
@@ -16,6 +16,8 @@ public class AppUser
     [EmailAddress]
     public string Email { get; set; } = "";
 
+    public bool IsAdmin { get; set; }
+
     [Required]
     public byte[] PasswordHash { get; set; } = Array.Empty<byte>();
 
@@ -24,7 +26,11 @@ public class AppUser
 
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
+    public int PawPoints { get; set; } = 0;
+
     public List<Product> Products { get; set; } = new();
+
+    public List<PetProfile> PetProfiles { get; set; } = new();
 
     public string? ResetCode { get; set; }
 

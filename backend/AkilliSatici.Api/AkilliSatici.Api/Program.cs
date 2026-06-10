@@ -1,10 +1,12 @@
-﻿using AkilliSatici.Api.Data;
+using AkilliSatici.Api.Data;
 using AkilliSatici.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Net.Http;
 using System.Text.Json.Serialization;
 
 
@@ -94,25 +96,50 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<EmailService>();
+// HttpClient for internal proxy calls to local FastAPI
+builder.Services.AddHttpClient("AiProxy", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:8000/");
+    client.Timeout = TimeSpan.FromSeconds(60);
+});
 
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Enable Swagger UI in all environments for easier remote testing (temporary).
+app.UseSwagger();
+app.UseSwaggerUI();
 // ...
 app.UseCors();
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); 
+app.UseStaticFiles();
+var defaultCulture = new System.Globalization.CultureInfo("en-US");
+var localizationOptions = new Microsoft.AspNetCore.Builder.RequestLocalizationOptions
+{
+    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture),
+    SupportedCultures = new List<System.Globalization.CultureInfo> { defaultCulture },
+    SupportedUICultures = new List<System.Globalization.CultureInfo> { defaultCulture }
+};
+app.UseRequestLocalization(localizationOptions);
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapGet("/", () => Results.Redirect("/swagger"));
+}
+else
+{
+    app.MapGet("/", () => Results.Ok(new
+    {
+        message = "AkilliSatici API çalışıyor.",
+        swagger = "/swagger"
+    }));
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

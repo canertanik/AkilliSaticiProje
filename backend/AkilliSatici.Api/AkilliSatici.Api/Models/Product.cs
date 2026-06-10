@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AkilliSatici.Api.Models;
@@ -25,6 +25,8 @@ public class Product
 
     public decimal? MinPrice { get; set; }
     public decimal? MaxPrice { get; set; }
+
+    public int StockQuantity { get; set; } = 0;
 
     [MaxLength(120)]
     public string? Category { get; set; }

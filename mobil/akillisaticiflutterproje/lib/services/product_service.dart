@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import '../core/constants/api_constants.dart';
 import '../core/utils/platform_file.dart';
@@ -49,16 +48,7 @@ class ProductService {
       request.fields[key] = value.toString();
     });
 
-    if (kIsWeb && product.webImageBytes != null) {
-      request.files.add(
-        http.MultipartFile.fromBytes(
-          'file',
-          product.webImageBytes!,
-          filename: 'upload.jpg',
-        ),
-      );
-    }
-    if (!kIsWeb && isLocalPath) {
+    if (isLocalPath) {
       final file = await buildMultipartFileFromPath(product.imageUrl);
       if (file != null) {
         request.files.add(file);

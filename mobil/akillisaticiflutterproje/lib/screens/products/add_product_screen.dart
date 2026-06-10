@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -8,7 +9,6 @@ import '../../widgets/gradient_background.dart';
 import '../../widgets/gradient_button.dart';
 import '../../core/constants/api_constants.dart';
 import 'dart:typed_data';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 import '../../core/utils/platform_image.dart';
 
@@ -21,6 +21,7 @@ class AddProductScreen extends StatefulWidget {
 
 class _AddProductScreenState extends State<AddProductScreen> {
   final _titleCtrl = TextEditingController();
+  final _weightCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
   final _priceCtrl = TextEditingController();
   String _selectedCategory = '';
@@ -33,29 +34,43 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Kozmetik',
   ];
 
-  Uint8List? _webImageBytes;
   String? _imagePath;
   bool _isAnalyzing = false;
   bool _showAiSuggestions = false;
   Map<String, String> _aiSuggestions = {};
   Timer? _aiDebounce;
 
+  bool get _hasImage => _imagePath != null;
+
+  bool _canRunAI({bool showWarning = false}) {
+    final hasTitle = _titleCtrl.text.trim().isNotEmpty;
+    final hasWeight = _weightCtrl.text.trim().isNotEmpty;
+    final missing = <String>[];
+
+    if (!_hasImage) missing.add('resim');
+    if (!hasTitle) missing.add('başlık');
+    if (!hasWeight) missing.add('ağırlık');
+
+    if (missing.isEmpty) return true;
+
+    if (showWarning && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('AI analizi için ${missing.join(', ')} zorunlu.'),
+        ),
+      );
+    }
+
+    return false;
+  }
+
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      if (kIsWeb) {
-        final bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _webImageBytes = bytes;
-          _imagePath = null;
-        });
-      } else {
-        setState(() {
-          _imagePath = pickedFile.path;
-          _webImageBytes = null;
-        });
-      }
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
       _triggerAIIfReady();
     }
   }
@@ -74,14 +89,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _aiDebounce?.cancel();
     _aiDebounce = Timer(const Duration(milliseconds: 300), () {
       if (!mounted) return;
-      if (!_isAnalyzing) _startAIAnalysis();
+      if (!_isAnalyzing && _canRunAI(showWarning: true)) _startAIAnalysis();
+    });
+  }
+
+  void _onWeightChanged() {
+    if (_weightCtrl.text.trim().isEmpty) return;
+    _aiDebounce?.cancel();
+    _aiDebounce = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
+      if (!_isAnalyzing && _canRunAI(showWarning: true)) _startAIAnalysis();
     });
   }
 
   void _triggerAIIfReady() {
-    final hasImage = _imagePath != null || _webImageBytes != null;
-    final hasTitle = _titleCtrl.text.trim().isNotEmpty;
-    if ((hasImage || hasTitle) && !_isAnalyzing) {
+    if (!_isAnalyzing && _canRunAI(showWarning: true)) {
       _startAIAnalysis();
     }
   }
@@ -93,28 +115,101 @@ class _AddProductScreenState extends State<AddProductScreen> {
     });
 
     try {
-      final uri = Uri.parse(
-        '${ApiConstants.aiBaseUrl}${ApiConstants.aiSuggest}',
-      );
+      final uri = Uri.parse('${ApiConstants.baseUrl}${ApiConstants.aiSuggest}');
+      String? imageBase64;
+      if (_imagePath != null) {
+        try {
+          final bytes = await File(_imagePath!).readAsBytes();
+          imageBase64 = base64Encode(bytes);
+        } catch (_) {
+          imageBase64 = null;
+        }
+      }
+
       final response = await http.post(
         uri,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'title': _titleCtrl.text,
-          'imageBase64':
-              kIsWeb && _webImageBytes != null
-                  ? base64Encode(_webImageBytes!)
-                  : null,
+          'size': _weightCtrl.text.trim(),
+          'imageBase64': imageBase64,
           'category': _selectedCategory.isEmpty ? null : _selectedCategory,
         }),
       );
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final data = jsonDecode(response.body);
+        final suggestedTitle = (data['title'] ?? '').toString().trim();
+        final brand = (data['brand'] ?? '').toString().trim();
+        final sizeValue = _weightCtrl.text.trim();
+        final category = (data['category'] ?? '').toString().trim();
+
+        if (suggestedTitle.isEmpty) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('AI ürün başlığı çıkaramadı, fiyat analizi yapılamadı.')),
+            );
+          }
+          setState(() {
+            _aiSuggestions = {
+              'description': (data['description'] ?? '').toString(),
+              'price': (data['priceRange'] ?? '').toString(),
+              'category': (data['category'] ?? '').toString(),
+            };
+            _showAiSuggestions = true;
+          });
+          if (mounted) {
+            setState(() => _isAnalyzing = false);
+          }
+          return;
+        }
+
+        Map<String, dynamic>? scrapedPrice;
+        try {
+          final scrapeUri = Uri.parse('${ApiConstants.baseUrl}/api/ai/price-scrape');
+          final priceQuery = _buildPriceQuery(
+            brand: brand,
+            title: suggestedTitle,
+            adminSize: sizeValue,
+            category: category.isNotEmpty ? category : _selectedCategory,
+          );
+
+          debugPrint("AI BRAND => $brand");
+          debugPrint("AI TITLE => $suggestedTitle");
+          debugPrint("ADMIN SIZE => $sizeValue");
+          debugPrint("PRICE QUERY => $priceQuery");
+
+          final scrapeResp = await http.post(
+            scrapeUri,
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'query': priceQuery,
+              'category': category.isNotEmpty ? category : _selectedCategory,
+              'weight': sizeValue,
+              'brand': brand.isNotEmpty ? brand : null,
+            }),
+          );
+          if (scrapeResp.statusCode >= 200 && scrapeResp.statusCode < 300) {
+            scrapedPrice = jsonDecode(scrapeResp.body);
+          }
+        } catch (_) {
+          scrapedPrice = null;
+        }
+
+        final suggested = scrapedPrice?['suggestedPrice'];
+        final median = scrapedPrice?['medianPrice'];
+        final mode = scrapedPrice?['modePrice'];
+
+        final selectedPrice = suggested ?? median ?? mode;
+        String priceStr = '';
+        if (selectedPrice != null) {
+          priceStr = (selectedPrice as num).toStringAsFixed(0);
+        }
+
         setState(() {
           _aiSuggestions = {
             'description': (data['description'] ?? '').toString(),
-            'price': (data['priceRange'] ?? '').toString(),
+            'price': priceStr.isNotEmpty ? priceStr : (data['priceRange'] ?? '').toString(),
             'category': (data['category'] ?? '').toString(),
           };
           _showAiSuggestions = true;
@@ -129,6 +224,73 @@ class _AddProductScreenState extends State<AddProductScreen> {
         setState(() => _isAnalyzing = false);
       }
     }
+  }
+
+  String _buildPriceQuery({
+    required String brand,
+    required String title,
+    required String adminSize,
+    String? category,
+  }) {
+    var cleanBrand = brand.trim();
+    var cleanTitle = title.trim();
+    var cleanSize = adminSize.trim();
+    var cleanCategory = category?.trim() ?? '';
+
+    if ((cleanBrand.isEmpty || cleanBrand.toLowerCase() == 'null') &&
+        cleanTitle.toLowerCase().contains('bonnie')) {
+      cleanBrand = 'Bonnie';
+    }
+
+    if (cleanBrand.isNotEmpty && cleanBrand.toLowerCase() != 'null') {
+      final brandLower = cleanBrand.toLowerCase();
+      if (cleanTitle.toLowerCase().startsWith(brandLower)) {
+        cleanTitle = cleanTitle.substring(cleanBrand.length).trim();
+      }
+    }
+
+    if (cleanCategory.isNotEmpty) {
+      cleanTitle = _deduplicateSubstring(cleanTitle, cleanCategory);
+    }
+
+    if (cleanSize.isNotEmpty) {
+      cleanTitle = _deduplicateSubstring(cleanTitle, cleanSize);
+    }
+
+    final parts = <String>[
+      if (cleanBrand.isNotEmpty && cleanBrand.toLowerCase() != 'null') cleanBrand,
+      if (cleanTitle.isNotEmpty) cleanTitle,
+      if (cleanSize.isNotEmpty) cleanSize,
+    ];
+
+    var finalQuery = parts.join(' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+
+    if (cleanSize.isNotEmpty) {
+      finalQuery = _deduplicateSubstring(finalQuery, cleanSize);
+    }
+    if (cleanCategory.isNotEmpty) {
+      finalQuery = _deduplicateSubstring(finalQuery, cleanCategory);
+    }
+
+    return finalQuery;
+  }
+
+  String _deduplicateSubstring(String text, String sub) {
+    if (sub.isEmpty || text.isEmpty) return text;
+    final subLower = sub.toLowerCase();
+    int firstIdx = text.toLowerCase().indexOf(subLower);
+    if (firstIdx == -1) return text;
+
+    final keepEnd = firstIdx + sub.length;
+    String firstPart = text.substring(0, keepEnd);
+    String remainingPart = text.substring(keepEnd);
+
+    String cleanedRemaining = remainingPart.replaceAllMapped(
+      RegExp(RegExp.escape(sub), caseSensitive: false),
+      (match) => '',
+    );
+
+    return (firstPart + cleanedRemaining).replaceAll(RegExp(r'\s+'), ' ').trim();
   }
 
   void _applyLocalAiSuggestions() {
@@ -228,14 +390,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   _saveProduct({required bool draft}) {
     final newProduct = Product(
       id: const Uuid().v4(),
-      imageUrl: kIsWeb ? '' : (_imagePath ?? ''),
+      imageUrl: (_imagePath ?? ''),
       title: _titleCtrl.text,
       description: _descriptionCtrl.text,
       priceRange: _priceCtrl.text,
       category: _selectedCategory,
       isDraft: draft,
       aiGenerated: _showAiSuggestions,
-      webImageBytes: kIsWeb ? _webImageBytes : null, // WEB BYTES
+      webImageBytes: null,
     );
     Navigator.pop(context, newProduct);
   }
@@ -244,6 +406,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   void dispose() {
     _aiDebounce?.cancel();
     _titleCtrl.dispose();
+    _weightCtrl.dispose();
     _descriptionCtrl.dispose();
     _priceCtrl.dispose();
     super.dispose();
@@ -252,7 +415,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final isValid =
+        _hasImage &&
         _titleCtrl.text.isNotEmpty &&
+        _weightCtrl.text.isNotEmpty &&
         _descriptionCtrl.text.isNotEmpty &&
         _priceCtrl.text.isNotEmpty &&
         _selectedCategory.isNotEmpty;
@@ -299,16 +464,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         border: Border.all(color: const Color(0xFFE2D9FF)),
                       ),
                       child:
-                          _imagePath != null || _webImageBytes != null
+                          _imagePath != null
                               ? ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: SizedBox.expand(
                                   child: FittedBox(
                                     fit: BoxFit.cover,
-                                    child:
-                                        kIsWeb
-                                            ? Image.memory(_webImageBytes!)
-                                            : buildFileImage(_imagePath!),
+                                    child: buildFileImage(_imagePath!),
                                   ),
                                 ),
                               )
@@ -352,6 +514,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     decoration: const InputDecoration(
                       hintText:
                           'Örn: Premium Spor Ayakkabı (Başlık Girmek Zorunlu )',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(14)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  const Text(
+                    'Ağırlık',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _weightCtrl,
+                    onChanged: (_) => _onWeightChanged(),
+                    decoration: const InputDecoration(
+                      hintText: 'Örn: 10kg, 500g, 1 litre',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(14)),
                       ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'models/product.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
@@ -11,6 +12,9 @@ import 'core/constants/api_constants.dart';
 import 'services/api_client.dart';
 import 'services/auth_service.dart';
 import 'services/product_service.dart';
+import 'services/cart_service.dart';
+import 'screens/shop/shop_home.dart';
+import 'screens/shop/cart_screen.dart';
 
 void main() {
   runApp(const SmartProductApp());
@@ -39,6 +43,7 @@ class _SmartProductAppState extends State<SmartProductApp> {
     _apiClient = ApiClient(baseUrl: ApiConstants.baseUrl);
     _authService = AuthService(_apiClient);
     _productService = ProductService(_apiClient);
+    // cart service lives at app-level via provider in runApp
   }
 
   Future<void> _loadProducts() async {
@@ -180,77 +185,85 @@ class _SmartProductAppState extends State<SmartProductApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ürün Yöneticim',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFF9C27F0),
-        scaffoldBackgroundColor: const Color(0xFFF6F5FB),
-        fontFamily: 'Roboto',
-        useMaterial3: false,
+    return ChangeNotifierProvider(
+      create: (_) => CartService(),
+      child: MaterialApp(
+        title: 'Ürün Yöneticim',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: const Color(0xFF9C27F0),
+          scaffoldBackgroundColor: const Color(0xFFF6F5FB),
+          fontFamily: 'Roboto',
+          useMaterial3: false,
+        ),
+        routes: {
+          '/login': (_) => LoginScreen(onLogin: _login),
+          '/register': (_) => RegisterScreen(onRegister: _register),
+          '/forgot':
+              (_) => ForgotPasswordScreen(
+                onRequestReset: _requestPasswordReset,
+                onReset: _resetPassword,
+              ),
+          '/home':
+              (_) => HomeScreen(
+                products: _products,
+                isLoading: _isLoading,
+                errorMessage: _errorMessage,
+                onAddProduct: (context) async {
+                  final result = await Navigator.push<Product?>(
+                    context,
+                    MaterialPageRoute(builder: (_) => AddProductScreen()),
+                  );
+                  if (result != null) {
+                    try {
+                      final created = await _productService.createProduct(
+                        result,
+                      );
+                      _addProduct(created);
+                    } catch (_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Ürün oluşturulamadı. API kontrol et.'),
+                        ),
+                      );
+                    }
+                  }
+                },
+                onEditProduct: (context, product) async {
+                  final updated = await Navigator.push<Product?>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => EditProductScreen(product: product),
+                    ),
+                  );
+                  if (updated != null) {
+                    try {
+                      final saved = await _productService.updateProduct(
+                        updated,
+                      );
+                      _updateProduct(saved);
+                    } catch (_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Ürün güncellenemedi. API kontrol et.'),
+                        ),
+                      );
+                    }
+                  }
+                },
+                onDeleteProduct: (id) => _deleteProductFromApi(context, id),
+              ),
+        },
+        initialRoute: '/login',
+        onGenerateRoute: (settings) {
+          // fallback için
+          return MaterialPageRoute(
+            builder:
+                (_) =>
+                    _loggedIn ? const Placeholder() : const SizedBox.shrink(),
+          );
+        },
       ),
-      routes: {
-        '/login': (_) => LoginScreen(onLogin: _login),
-        '/register': (_) => RegisterScreen(onRegister: _register),
-        '/forgot':
-            (_) => ForgotPasswordScreen(
-              onRequestReset: _requestPasswordReset,
-              onReset: _resetPassword,
-            ),
-        '/home':
-            (_) => HomeScreen(
-              products: _products,
-              isLoading: _isLoading,
-              errorMessage: _errorMessage,
-              onAddProduct: (context) async {
-                final result = await Navigator.push<Product?>(
-                  context,
-                  MaterialPageRoute(builder: (_) => AddProductScreen()),
-                );
-                if (result != null) {
-                  try {
-                    final created = await _productService.createProduct(result);
-                    _addProduct(created);
-                  } catch (_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Ürün oluşturulamadı. API kontrol et.'),
-                      ),
-                    );
-                  }
-                }
-              },
-              onEditProduct: (context, product) async {
-                final updated = await Navigator.push<Product?>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => EditProductScreen(product: product),
-                  ),
-                );
-                if (updated != null) {
-                  try {
-                    final saved = await _productService.updateProduct(updated);
-                    _updateProduct(saved);
-                  } catch (_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Ürün güncellenemedi. API kontrol et.'),
-                      ),
-                    );
-                  }
-                }
-              },
-              onDeleteProduct: (id) => _deleteProductFromApi(context, id),
-            ),
-      },
-      initialRoute: _loggedIn ? '/home' : '/login',
-      onGenerateRoute: (settings) {
-        // fallback için
-        return MaterialPageRoute(
-          builder:
-              (_) => _loggedIn ? const Placeholder() : const SizedBox.shrink(),
-        );
-      },
     );
   }
 }

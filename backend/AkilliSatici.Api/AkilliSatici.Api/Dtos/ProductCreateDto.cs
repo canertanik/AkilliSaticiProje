@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using AkilliSatici.Api.Models;
 
 namespace AkilliSatici.Api.Dtos;
@@ -11,5 +11,6 @@ public record ProductCreateDto(
     string? Category,
     string? ImageUrl,
     bool IsAiGenerated,
-    ProductStatus Status
+    ProductStatus Status,
+    int StockQuantity
 );

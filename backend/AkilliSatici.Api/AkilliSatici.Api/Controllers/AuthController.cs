@@ -1,12 +1,14 @@
-﻿using AkilliSatici.Api.Data;
+using AkilliSatici.Api.Data;
 using AkilliSatici.Api.Models;
 using AkilliSatici.Api.Services;
 using AkilliSatici.Api.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AkilliSatici.Api.Controllers;
 
@@ -44,7 +46,8 @@ public class AuthController : ControllerBase
             StoreName = dto.StoreName.Trim(),
             Email = email,
             PasswordHash = hash,
-            PasswordSalt = salt
+            PasswordSalt = salt,
+            IsAdmin = false
         };
 
         _db.Users.Add(user);
@@ -67,7 +70,43 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Hatalı giriş" });
 
         var token = _jwt.CreateToken(user);
-        return Ok(new { token });
+        return Ok(new
+        {
+            token,
+            user = new
+            {
+                user.Id,
+                user.FullName,
+                user.Email,
+                user.StoreName,
+                user.IsAdmin,
+                user.PawPoints
+            }
+        });
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> Me()
+    {
+        var sub = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                  ?? User.FindFirstValue(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub);
+
+        if (string.IsNullOrWhiteSpace(sub) || !int.TryParse(sub, out var userId))
+            return Unauthorized();
+
+        var user = await _db.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == userId);
+        if (user is null) return Unauthorized();
+
+        return Ok(new
+        {
+            user.Id,
+            user.FullName,
+            user.Email,
+            user.StoreName,
+            user.IsAdmin,
+            user.PawPoints
+        });
     }
 
     [HttpPost("forgot-password")]

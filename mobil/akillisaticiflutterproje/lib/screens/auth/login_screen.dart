@@ -152,6 +152,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(color: Color(0xFFB658FF)),
                     ),
                   ),
+                  const SizedBox(height: 12),
+                  TextButton.icon(
+                    onPressed: () => Navigator.pushNamed(context, '/web'),
+                    icon: const Icon(Icons.language_outlined),
+                    label: const Text('Web Arayüzünü Aç'),
+                  ),
                 ],
               ),
             ),
